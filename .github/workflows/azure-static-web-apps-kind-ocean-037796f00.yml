@@ -19,6 +19,11 @@ jobs:
         with:
           submodules: true
 
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
+
       - name: Build Unity WebGL
         uses: game-ci/unity-builder@v2
         env:
@@ -27,14 +32,6 @@ jobs:
           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
         with:
           targetPlatform: WebGL
-
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library
-
-      - name: ls
-        run: "ls build/WebGL"
 
       - name: Build And Deploy
         id: builddeploy
